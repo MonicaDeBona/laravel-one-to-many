@@ -18,8 +18,10 @@
                 <hr>
                 <p class="card-text text-center">
                     <small class="text-muted">{{ $project->slug }}</small><br>
+                    <small class="text-muted">Type: {{ $project->type->name }}</small><br>
                     <small class="text-muted">Author: {{ $project->author }}</small><br>
                     <small class="text-muted">Posted on: {{ $project->project_date }}</small>
+
                 </p>
                 <div class="actions d-flex justify-content-between w-100">
                     @if (isset($previousProject))
