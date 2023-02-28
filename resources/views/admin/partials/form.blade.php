@@ -14,6 +14,24 @@
             <h5 class="mb-4">
                 Author: <span class="fw-semibold">{{ Auth::user()->name }} </span>
             </h5>
+
+
+
+            <div class="form-outline mb-3">
+                <label for="project_type" class="form-label">Project type</label>
+
+
+                <select class="form-control @error('type_id') is-invalid @enderror" id="project_type" name="type_id">
+                    <option value="">-- Select project type --</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}"
+                            {{ old('type_id', $project->type_id) == $type->id ? 'selected' : '' }}>{{ $type->name }}
+                        </option>
+                    @endforeach
+            </div>
+
+
+
             <div class="form-outline w-25 mb-3">
                 <label for="project_title" class="form-label">Project title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"

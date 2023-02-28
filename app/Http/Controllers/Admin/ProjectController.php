@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -18,7 +19,8 @@ class ProjectController extends Controller
         'content.min' => 'Content must be at least :min characters',
         'project_date.required' => 'Please select a project date',
         'project_date.date' => 'Project date must be a valid date',
-        'image.required' => 'Choose an image'
+        'image.required' => 'Choose an image',
+        'type.required' => 'Select type'
     ];
 
     public function validationRules()
@@ -27,7 +29,8 @@ class ProjectController extends Controller
             'title' => 'required|unique:projects',
             'content' => 'required|min:10',
             'project_date' => 'required|date',
-            'image' => 'required|image|max:300'
+            'image' => 'required|image|max:300',
+            'type_id' => 'required|exists:types,id'
         ];
     }
     /**
@@ -48,7 +51,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create', ["project" => new Project()]);
+        return view('admin.projects.create', ["project" => new Project(), 'types' => Type::all()]);
     }
 
     /**
@@ -91,7 +94,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', ['project' => $project]);
+        return view('admin.projects.edit', ['project' => $project, 'types' => Type::all()]);
     }
 
     /**
