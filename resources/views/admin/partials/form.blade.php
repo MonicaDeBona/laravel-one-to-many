@@ -1,4 +1,5 @@
-<form action="{{ route($routeName, $project) }}" enctype="multipart/form-data" method="POST" class="p-5 needs-validation">
+<form action="{{ route($routeName, $project) }}" enctype="multipart/form-data" method="POST" class="p-5 needs-validation"
+    novalidate>
     @csrf
     @method($method)
     @if ($errors->any())
@@ -18,13 +19,17 @@
                 <label for="project_type" class="form-label">Project type</label>
                 <select class="form-control @error('type_id') is-invalid @enderror" id="project_type" name="type_id">
                     <option value="">-- Select project type --</option>
-
                     @foreach ($types as $type)
                         <option value="{{ $type->id }}"
                             {{ old('type_id', $project->type_id) == $type->id ? 'selected' : '' }}>{{ $type->name }}
                         </option>
                     @endforeach
                 </select>
+                @error('type_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="form-outline w-25 mb-3">
                 <label for="project_title" class="form-label">Project title</label>
@@ -71,8 +76,8 @@
         </div>
         <div class="card-footer">
             <a href="{{ route('admin.projects.index') }}" class="btn btn-dark"><i
-                    class="fa-solid fa-arrow-left"></i>&nbsp;</a>
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-save"></i>&nbsp;</button>
+                    class="fa-solid fa-arrow-left"></i></a>
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-save"></i></button>
         </div>
     </div>
 </form>
