@@ -2,9 +2,11 @@
 
 @section('content')
     <div class="container">
-        <a href="{{ route('admin.projects.trashed') }}" class="btn btn-sm btn-primary">
-            Trashed
-        </a>
+        <div class="col-md-4 d-flex justify-content-end">
+            <a href="{{ route('admin.projects.trashed') }}" class="btn btn-sm btn-primary me-auto">
+                <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
         @if (session('message'))
             <div class="alert alert-{{ session('alert-type') }}">
                 {{ session('message') }}
@@ -17,9 +19,9 @@
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Project date</th>
-                    <th scope="col">
+                    <th scope="col" class="text-center">
                         <a href="{{ route('admin.projects.create') }}" class="btn btn-sm btn-primary">
-                            Create new post
+                            <i class="fa-solid fa-plus"></i>
                         </a>
                     </th>
                 </tr>
@@ -27,28 +29,20 @@
             <tbody>
                 @foreach ($projects as $project)
                     <tr>
-                        <td>
-                            {{ $project->id }}
-                        </td>
-                        <td>
-                            {{ $project->title }}
-                        </td>
-                        <td>
-                            {{ $project->author }}
-                        </td>
-                        <td>
-                            {{ $project->project_date }}
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.projects.show', $project->slug) }}"
-                                class="btn btn-sm btn-primary">Show</a>
-                            <a href="{{ route('admin.projects.edit', $project->slug) }}"
-                                class="btn btn-sm btn-success">Edit</a>
+                        <td>{{ $project->id }}</td>
+                        <td>{{ $project->title }}</td>
+                        <td>{{ $project->author }}</td>
+                        <td>{{ $project->project_date }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-sm btn-primary"><i
+                                    class="fa-solid fa-eye"></i></a>
+                            <a href="{{ route('admin.projects.edit', $project->slug) }}" class="btn btn-sm btn-success"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
                             <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger">Delete</button>
+                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

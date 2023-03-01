@@ -2,20 +2,25 @@
     novalidate>
     @csrf
     @method($method)
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <h6>We were unable to process your submission due to errors. Please review and try again.</h6>
         </div>
     @endif
+
     <div class="card">
+
         <div class="card-header">
             <h2 class="text-center mb-2">Create new project</h2>
         </div>
+
         <div class="card-body">
             <h5 class="mb-4">
                 Author: <span class="fw-semibold">{{ Auth::user()->name }} </span>
             </h5>
-            <div class="form-outline mb-3">
+
+            <div class="form-outline mb-3 w-25">
                 <label for="project_type" class="form-label">Project type</label>
                 <select class="form-control @error('type_id') is-invalid @enderror" id="project_type" name="type_id">
                     <option value="">-- Select project type --</option>
@@ -31,6 +36,7 @@
                     </div>
                 @enderror
             </div>
+
             <div class="form-outline w-25 mb-3">
                 <label for="project_title" class="form-label">Project title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
@@ -42,6 +48,7 @@
                     </div>
                 @enderror
             </div>
+
             <div class="form-outline w-25 mb-3">
                 <label for="project_image" class="form-label">Project image</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image"
@@ -53,6 +60,7 @@
                     </div>
                 @enderror
             </div>
+
             <div class="mb-3 w-25">
                 <label for="project_date" class="form-label">Project date</label>
                 <input type="date" class="form-control @error('project_date') is-invalid @enderror" id="project_date"
@@ -63,6 +71,7 @@
                     </div>
                 @enderror
             </div>
+
             <div class="form-outline mb-3">
                 <label for="project_content" class="form-label">Project content</label>
                 <textarea class="form-control @error('content') is-invalid @enderror" minlength="10" id="project_content" rows="10"
@@ -73,6 +82,7 @@
                     </div>
                 @enderror
             </div>
+
         </div>
         <div class="card-footer">
             <a href="{{ route('admin.projects.index') }}" class="btn btn-dark"><i
